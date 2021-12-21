@@ -97,7 +97,7 @@
     margin: 0;
     font: inherit;
     color: currentColor;
-    width: 2rem;
+    width: 1.5rem;
     height: 1.5rem;
     border: 0.1px solid currentColor;
     border-radius: var(--border-radius-round);
