@@ -50,19 +50,25 @@ function ls_quiz_answers_info_html( $post ){
 	$html .= '<input type="hidden" name="question_box_nonce" value="' . wp_create_nonce( basename( __FILE__ ) ) . '" />';
 	$html .= '<table class="form-table">';
 	$html .= '<tr><th></th><td id="field-button">';
-	$html .= '<button id="remove-field" type="button" class="btn btn-primary">Remove Field</button>';
-	$html .= '<button id="add-field" type="button" class="btn btn-primary">Add Field</button>';
+	// $html .= '<button id="remove-field" type="button" class="btn btn-primary">Remove Field</button>';
+	$html .= '<button id="remove-field" type="button" class="btn btn-primary">Mező törlése</button>';
+	// $html .= '<button id="add-field" type="button" class="btn btn-primary">Add Field</button>';
+	$html .= '<button id="add-field" type="button" class="btn btn-primary">Mező hozzáadása</button>';
 	$html .= '</td></tr>';
-	$html .= '<tr><th><label for="question_index">Question index:</label></th>';
+	// $html .= '<tr><th><label for="question_index">Question index:</label></th>';
+	$html .= '<tr><th><label for="question_index">Kérdés sorszáma:</label></th>';
 	$html .= '<td><input id="question_index" type="number" name="question_index" min="1" value="' . $qindex . '"></td>';
 	$html .= '</tr>';
-	$html .= '<tr><th><label for="number_of_choices">Number of choices:</label></th>';
+	// $html .= '<tr><th><label for="number_of_choices">Number of choices:</label></th>';
+	$html .= '<tr><th><label for="number_of_choices">Lehetséges válaszok száma:</label></th>';
 	$html .= '<td><input id="number_of_choices" type="number" name="number_of_choices" min="1" value="' . $qchoice . '"></td>';
 	$html .= '</tr>';
 	foreach( $qanswers as $key => $qanswer) {
-		$html .= '<tr><th style=""><label for="quiz_answer">Answer ' . ( $key+1 ) . '</label></th>';
+		// $html .= '<tr><th style=""><label for="quiz_answer">Answer ' . ( $key+1 ) . '</label></th>';
+		$html .= '<tr><th style=""><label for="quiz_answer">Válasz ' . ( $key+1 ) . '</label></th>';
 		$html .= '<td><textarea class="widefat" name="quiz_answer[]" id="quiz_answer' . ( $key+1 ) . '">' . esc_textarea( trim( $qanswer ) ) . '</textarea></td></tr>';
-		$html .= '<tr><th style=""><label for="quiz_reaction">Reaction ' . ( $key+1 ) . '</label></th>';
+		// $html .= '<tr><th style=""><label for="quiz_reaction">Reaction ' . ( $key+1 ) . '</label></th>';
+		$html .= '<tr><th style=""><label for="quiz_reaction">Reakció ' . ( $key+1 ) . '</label></th>';
 		$html .= '<td><input class="widefat" type="text" name="quiz_reaction[]" id="quiz_reaction' . ( $key+1
 		 ) . '"value="' . esc_attr( $qreactions[$key] ) .'" /></td></tr>';
 	}
@@ -94,8 +100,8 @@ function ls_save_quizes( $post_id ) {
 		foreach ( $qreactions as $qreaction) {
 			array_push( $filtered_reactions, $qreaction );
 		}
-		$qanswers = json_encode( $filtered_answers );
-		$qreactions = json_encode( $filtered_reactions );
+		$qanswers = json_encode( $filtered_answers, JSON_UNESCAPED_UNICODE );
+		$qreactions = json_encode( $filtered_reactions, JSON_UNESCAPED_UNICODE );
 		update_post_meta( $post_id, "_question_answers", $qanswers );
 		update_post_meta( $post_id, "_question_reactions", $qreactions );
 	}

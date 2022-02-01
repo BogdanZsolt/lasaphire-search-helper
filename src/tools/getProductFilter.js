@@ -1,4 +1,4 @@
-import url from './url';
+import { url } from './data';
 
 export default async(result) => {
   console.log(result);

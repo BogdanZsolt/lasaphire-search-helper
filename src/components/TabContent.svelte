@@ -34,7 +34,7 @@
 </script>
 
 {#if $selectedTab === id}
-  <div class="tab-content">
+  <div class="tab-content glassmorph">
     <div class="tab-content-header">
       <Question question={data.question} />
       <Option options={Number.parseInt(data.number_of_choices)} />

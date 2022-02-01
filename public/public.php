@@ -10,7 +10,8 @@ function lsq_public_styles_scripts(){
 	wp_localize_script( 'lsq-public-script', 'sHelperData', array(
 		'site_url' => get_site_url(),
 		'ajax_url'		=> admin_url('admin-ajax.php'),
-		'sec'				=> wp_create_nonce('get-product-query'),
+		'currencySymbol' => get_woocommerce_currency_symbol(),
+		'currencyPos'				=> get_option( 'woocommerce_currency_pos' ),
 	));
 	wp_enqueue_script( 'lsq-public-script' );
 

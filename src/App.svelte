@@ -9,7 +9,7 @@
   import Tabs from "./components/Tabs.svelte";
   import Tab from "./components/Tab.svelte";
   import TabContent from "./components/TabContent.svelte";
-  import url from "./tools/url";
+  import { url } from "./tools/data";
   import Result from "./components/Result.svelte";
   // data
   import { setQuiz } from "./tools/quiz";
@@ -36,6 +36,7 @@
     const response = await fetch(`${url}/wp-json/wp/v2/ls_quiz`);
     quizData = await response.json();
     quizData = setQuiz(quizData);
+    console.log(quizData);
     questions = quizData[selectedTab].content.length;
   });
   const setQuestion = (qNum) => {
@@ -89,7 +90,7 @@
         <Grid>
           <Title
             ><h1 in:fly={{ x: 100, delay: 1000 }} out:fly={{ x: 100 }}>
-              Find My {quizData[selectedTab].name}
+              Találjuk meg a {quizData[selectedTab].name}
             </h1></Title
           >
           <Tabs bind:selectedTab>

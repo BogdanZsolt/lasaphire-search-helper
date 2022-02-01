@@ -2,12 +2,18 @@
 
 
 function set_ls_quiz_columns($columns) {
-	$columns = array(
-		'title'                 => __( 'Question', 'lsquiz' ),
-		'question_index'        => __( 'Question Index', 'lsquiz' ),
-		'quiz_categories'  					=> __( 'Categories', 'lsquiz' ),
-		'date'                  => __( 'Date', 'lsquiz' ),
-	);
+	// $columns = array(
+	// 	'title'                 => __( 'Question', 'lsquiz' ),
+	// 	'question_index'        => __( 'Question Index', 'lsquiz' ),
+	// 	'quiz_categories'  					=> __( 'Categories', 'lsquiz' ),
+	// 	'date'                  => __( 'Date', 'lsquiz' ),
+	// );
+	unset($columns['title']);
+	unset($columns['date']);
+	$columns['title'] = __('Kérdés', 'lsquiz');
+	$columns['question_index'] = __('Kérdés Index', 'lsquiz');
+	$columns['quiz_categories'] = __( 'Kategóriák', 'lsquiz' );
+	$columns['date'] = __( 'Közzétéve', 'lsquiz' );
 	return $columns;
 }
 add_filter('manage_ls_quiz_posts_columns', 'set_ls_quiz_columns');

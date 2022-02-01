@@ -1,5 +1,6 @@
 <script>
   import { fade } from "svelte/transition";
+  import { currencySymbol, currencyPos } from "../tools/data";
   export let product = [];
 </script>
 
@@ -16,23 +17,48 @@
       <p>
         {#if product.type === "simple"}
           {#if product.salePrice === ""}
-            <span>&euro; {product.regularPrice}</span>
+            {#if currencyPos === "left"}
+              <span>{currencySymbol}{product.regularPrice}</span>
+            {:else if currencyPos === "right"}
+              <span>{product.regularPrice}{currencySymbol}</span>
+            {/if}
           {:else if product.salePrice !== ""}
             <del>
-              <span class="discount">&euro; {product.regularPrice} </span>
+              {#if currencyPos === "left"}
+                <span class="discount"
+                  >{currencySymbol}{product.regularPrice}</span
+                >
+              {:else if currencyPos === "right"}
+                <span class="discount"
+                  >{product.regularPrice}{currencySymbol}</span
+                >
+              {/if}
             </del>
-            <span>
-              &euro; {product.salePrice}
-            </span>
           {/if}
         {:else if product.type === "variable"}
           <span>
-            &euro; {product.salePrice} &ndash; &euro; {product.regularPrice}
+            {#if currencyPos === "left"}
+              {currencySymbol}
+              {product.salePrice} &ndash; {currencySymbol}
+              {product.regularPrice}
+            {:else if currencyPos === "right"}
+              {product.salePrice}
+              {currencySymbol} &ndash; {product.regularPrice}
+              {currencySymbol}
+            {/if}
           </span>
         {:else if product.type === "external"}
-          <span>&euro; {product.price}</span>
+          {#if currencyPos === "left"}
+            <span>{currencySymbol} {product.price}</span>
+          {:else if currencyPos === "right"}
+            <span>{product.price} {currencySymbol}</span>
+          {/if}
         {:else if product.type === "grouped"}
-          <bdi><span>&euro; {product.price}</span></bdi>
+          {#if currencyPos === "left"}
+            <bdi><span>{currencySymbol} {product.price}</span></bdi>
+          {:else if currencyPos === "right"}
+            <bdi><span>{product.price} {currencySymbol}</span></bdi>
+          {/if}
         {/if}
       </p>
     </div>
